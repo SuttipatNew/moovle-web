@@ -28,7 +28,9 @@ class Homepage extends Component {
         <Layout>
           <Grid centered>
             <Grid.Row>
-              Moovle!
+              <TextFont>
+                Moovle
+              </TextFont>
             </Grid.Row>
             <Grid.Row>
               <Form 
@@ -45,7 +47,12 @@ class Homepage extends Component {
                   <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={10} />
                 </Form.Group>
                 <SortMenu />
-                <Form.Button color='red' content='Search' />
+                <Form.Button 
+                  style={{ 
+                    backgroundColor: '#B50000',
+                    color: 'white' 
+                    }} 
+                  content='SEARCH' />
               </Form>
             </Grid.Row>
           </Grid>
@@ -60,4 +67,10 @@ export default Homepage;
 const Layout = styled.div`
   padding-top: 20em;
   text-align: center;
+`
+const TextFont = styled.div`
+  font-family: 'Playfair Display', serif;
+  font-size: 6em;
+  padding: 0 0 0.2em 0; 
+  color: #B50000;
 `

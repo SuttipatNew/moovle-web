@@ -22,21 +22,19 @@ export default class SortMenu extends Component {
           />
           <Menu.Item
             name='news'
+            color='red'
             active={activeItem === 'news'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             name='cast'
+            color='red'
             active={activeItem === 'cast'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             name='image'
-            active={activeItem === 'image'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='image'
+            color='red'
             active={activeItem === 'image'}
             onClick={this.handleItemClick}
           />
