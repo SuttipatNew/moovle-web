@@ -3,9 +3,12 @@ import
   { Grid,
     Button,
     Container,
+    Icon,
     Form,
   } from 'semantic-ui-react'
 import styled from 'styled-components'
+
+import SortMenu from './SortMenu';
 
 class Homepage extends Component {
   state = { item: ''}
@@ -28,14 +31,34 @@ class Homepage extends Component {
               Moovle!
             </Grid.Row>
             <Grid.Row>
-              <Form onSubmit={this.handleSubmit}>
-                <Form.Group>
-                  <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} />
+              <Form 
+                style={{
+                  width: '75%',
+                }} 
+                onSubmit={this.handleSubmit}>
+                <Form.Group 
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                  }}>
+                  <Icon flipped='horizontally' size='big' disabled name='search' />
+                  <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={10} />
                 </Form.Group>
+                <SortMenu />
                 <Form.Button color='red' content='Search' />
               </Form>
             </Grid.Row>
           </Grid>
+          {/* <div>
+            Moovle!
+          </div>
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Group>
+              <Icon size='large' disabled name='search' />
+              <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={8} />
+            </Form.Group>
+            <Form.Button color='red' content='Search' />
+          </Form> */}
         </Layout>
       </Container>
     );
@@ -46,7 +69,5 @@ export default Homepage;
 
 const Layout = styled.div`
   padding-top: 20em;
-  /* text-align: center;
-  display: flex;
-  flex-direction: column; */
+  text-align: center;
 `
