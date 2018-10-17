@@ -47,11 +47,8 @@ class Homepage extends Component {
                   <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={10} />
                 </Form.Group>
                 <SortMenu />
-                <Form.Button 
-                  style={{ 
-                    backgroundColor: '#B50000',
-                    color: 'white' 
-                    }} 
+                <Button
+                  className='button'
                   content='SEARCH' />
               </Form>
             </Grid.Row>
@@ -74,3 +71,7 @@ const TextFont = styled.div`
   padding: 0 0 0.2em 0; 
   color: #B50000;
 `
+// const ButtonStyle = styled.div`
+//   background-color: #B50000;
+//   color: white;
+// `
