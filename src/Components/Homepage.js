@@ -49,16 +49,6 @@ class Homepage extends Component {
               </Form>
             </Grid.Row>
           </Grid>
-          {/* <div>
-            Moovle!
-          </div>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Group>
-              <Icon size='large' disabled name='search' />
-              <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={8} />
-            </Form.Group>
-            <Form.Button color='red' content='Search' />
-          </Form> */}
         </Layout>
       </Container>
     );
