@@ -9,6 +9,7 @@ import
 import styled from 'styled-components'
 
 import SortMenu from './SortMenu';
+import {Link} from 'react-router-dom'
 
 class Homepage extends Component {
   state = { item: ''}
@@ -20,6 +21,11 @@ class Homepage extends Component {
 
     this.setState({ submittedItem: item })
   }
+
+  routeChange(){
+    window.location.hash = "search";
+    }
+
 
   render() {
     const { item, submittedItem } = this.state
@@ -47,13 +53,17 @@ class Homepage extends Component {
                   <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={10} />
                 </Form.Group>
                 <SortMenu />
-                <Form.Button 
-                  style={{ 
-                    backgroundColor: '#B50000',
-                    color: 'white' 
-                    }} 
-                  content='SEARCH' />
-              </Form>
+                   <Button
+                    style={{ 
+                      backgroundColor: '#B50000',
+                      color: 'white' 
+                      }} 
+                    content='SEARCH'
+                   as = {Link}
+                   to = '/search'>
+                   Search
+                    </Button>
+                </Form>
             </Grid.Row>
           </Grid>
         </Layout>
