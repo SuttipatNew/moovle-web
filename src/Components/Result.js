@@ -7,19 +7,68 @@ import {Link} from 'react-router-dom'
 import SortMenu_2 from './SortMenu_2';
 import OutputResult from './OutputResult'
 import styled from 'styled-components'
-
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 
 class Result extends Component {
   
-  state = { item: ''}
+  state = { 
+    text_search: '',
+    items: [
+      {
+        childKey: 0,
+        image: '/images/wireframe/image.png',
+        header: 'Header',
+        description: 'Description',
+        meta: 'Metadata',
+        extra: 'Extra',
+      },
+      {
+        childKey: 1,
+        image: '/images/wireframe/image.png',
+        header: 'Header',
+        description: 'Description',
+        meta: 'Metadata',
+        extra: 'Extra',
+      },
+    ]
+  }
 
-  handleChange = (e, { item, value }) => this.setState({ [item]: value })
+  handleChange = (e, {  value }) => this.setState({ text_search: value })
 
   handleSubmit = () => {
-    const { item } = this.state
+    const { text_search } = this.state
+    fetch('http://localhost:9200/_search?q= '+ text_search)
+    .then((response) => {
+      if (response.status >= 400) {
+          throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then((stories) => {
+        const items = stories.hits.hits.map(hit => ({ 
+          image: '/images/wireframe/image.png',
+          header: hit._source.title,
+          description: hit._source.text,
 
-    this.setState({ submittedItem: item })
+        }));
+        this.setState({ items: items })
+      });
+  }
+
+  handleClick = () => {
+    console.log("Hello World")
+    fetch('http://localhost:9200/_search?q=brad%20pitt')
+    .then(function(response) {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+    })
+    .then(function(stories) {
+        console.log(stories);
+    });
   }
 
   routeChange(){
@@ -27,7 +76,7 @@ class Result extends Component {
     }
   
   render() {
-    const { item, submittedItem } = this.state
+    const { text_search, submittedItem } = this.state
     return (
         <div class="ui grid">
           <div class="row">
@@ -40,15 +89,6 @@ class Result extends Component {
                 </Menu.Item>
               </Form>
             </div>
-          {/* <Grid.Row height = {3}>
-              <Menu.Item >
-
-              </Menu.Item>
-          </Grid.Row>
-
-          <Grid.Row height = {3}>
-            <SubMenu/>
-          </Grid.Row> */}
             <div class="ten wide column" >
               <div class = 'ui hidden divider'></div>
                 <Form 
@@ -62,16 +102,9 @@ class Result extends Component {
                       justifyContent: 'left'
                     }}>
                     <Icon flipped='horizontally' size='big' disabled name='search' />
-                    <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={10} />
-                    <Button
-                    style={{ 
-                      backgroundColor: '#B50000',
-                      color: 'white' 
-                      }} 
-                    content='SEARCH'
-                   as = {Link}
-                   to = '/search'>
-                   Search
+                    <Form.Input placeholder='Search..' value={ text_search } onChange={this.handleChange} width={10} />
+                    <Button onClick={this.handleClick}>
+                      Search
                     </Button>
                   </Form.Group>
                   <Form.Group 
@@ -97,7 +130,7 @@ class Result extends Component {
               </div>
             <div class = "row">
               <Container>
-                <OutputResult />
+                <OutputResult items={this.state.items} />
               </Container>
             </div>
             </div>

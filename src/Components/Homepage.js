@@ -26,7 +26,7 @@ class Homepage extends Component {
 
   handleClick = () => {
     console.log("Hello World")
-    fetch('https://api.github.com/users/bnoly2b4l')
+    fetch('http://localhost:9200/_search?q=brad%20pitt')
     .then(function(response) {
         if (response.status >= 400) {
             throw new Error("Bad response from server");
