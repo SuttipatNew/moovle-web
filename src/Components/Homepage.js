@@ -80,6 +80,10 @@ class Homepage extends Component {
                    Search
                     </Button>
                 </Form>
+                <Button
+                  className='button'
+                  content='SEARCH' />
+              </Form>
             </Grid.Row>
           </Grid>
           <Button onClick={this.handleClick}>
@@ -103,3 +107,7 @@ const TextFont = styled.div`
   padding: 0 0 0.2em 0; 
   color: #B50000;
 `
+// const ButtonStyle = styled.div`
+//   background-color: #B50000;
+//   color: white;
+// `
