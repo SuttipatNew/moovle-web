@@ -6,9 +6,12 @@ import
     Icon,
     Form,
   } from 'semantic-ui-react'
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 import SortMenu from './SortMenu';
+import {Link} from 'react-router-dom';
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
 class Homepage extends Component {
   state = { item: ''}
@@ -20,6 +23,25 @@ class Homepage extends Component {
 
     this.setState({ submittedItem: item })
   }
+
+  handleClick = () => {
+    console.log("Hello World")
+    fetch('https://api.github.com/users/bnoly2b4l')
+    .then(function(response) {
+        if (response.status >= 400) {
+            throw new Error("Bad response from server");
+        }
+        return response.json();
+    })
+    .then(function(stories) {
+        console.log(stories);
+    });
+  }
+
+  routeChange(){
+    window.location.hash = "search";
+    }
+
 
   render() {
     const { item, submittedItem } = this.state
@@ -47,12 +69,26 @@ class Homepage extends Component {
                   <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={10} />
                 </Form.Group>
                 <SortMenu />
+                   <Button
+                    style={{ 
+                      backgroundColor: '#B50000',
+                      color: 'white' 
+                      }} 
+                    content='SEARCH'
+                   as = {Link}
+                   to = '/search'>
+                   Search
+                    </Button>
+                </Form>
                 <Button
                   className='button'
                   content='SEARCH' />
               </Form>
             </Grid.Row>
           </Grid>
+          <Button onClick={this.handleClick}>
+              YAYAA
+          </Button>
         </Layout>
       </Container>
     );
