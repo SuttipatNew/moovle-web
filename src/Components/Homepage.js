@@ -68,7 +68,7 @@ class Homepage extends Component {
                   <Icon flipped='horizontally' size='big' disabled name='search' />
                   <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={10} />
                 </Form.Group>
-                <SortMenu />
+                  <SortMenu />
                    <Button
                     style={{ 
                       backgroundColor: '#B50000',
@@ -78,16 +78,12 @@ class Homepage extends Component {
                    as = {Link}
                    to = '/search'>
                    Search
-                    </Button>
+                  </Button>
                 </Form>
-                <Button
-                  className='button'
-                  content='SEARCH' />
-              </Form>
             </Grid.Row>
           </Grid>
           <Button onClick={this.handleClick}>
-              YAYAA
+              API
           </Button>
         </Layout>
       </Container>
