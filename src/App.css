@@ -32,6 +32,16 @@
   color: #fff !important;
 }
 
+.ellippppp {
+  white-space: nowrap;
+  width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid #000000;
+  display: block;
+  margin: 0 auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

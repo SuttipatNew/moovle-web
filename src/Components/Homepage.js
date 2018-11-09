@@ -19,9 +19,9 @@ class Homepage extends Component {
   handleChange = (e, { item, value }) => this.setState({ [item]: value })
 
   handleSubmit = () => {
-    const { item } = this.state
+    const { text_search } = this.state
 
-    this.setState({ submittedItem: item })
+    this.setState({ submittedItem: text_search })
   }
 
   handleClick = () => {
@@ -44,7 +44,7 @@ class Homepage extends Component {
 
 
   render() {
-    const { item, submittedItem } = this.state
+    const { text_search, submittedItem } = this.state
     return (
       <Container>
         <Layout>
@@ -66,14 +66,10 @@ class Homepage extends Component {
                     justifyContent: 'center'
                   }}>
                   <Icon flipped='horizontally' size='big' disabled name='search' />
-                  <Form.Input placeholder='Search..' item='item' value={ item } onChange={this.handleChange} width={10} />
+                  <Form.Input placeholder='Search..' item='item' value={ text_search } onChange={this.handleChange} width={10} />
                 </Form.Group>
                   <SortMenu />
                    <Button
-                    style={{ 
-                      backgroundColor: '#B50000',
-                      color: 'white' 
-                      }} 
                     content='SEARCH'
                    as = {Link}
                    to = '/search'>
@@ -82,9 +78,9 @@ class Homepage extends Component {
                 </Form>
             </Grid.Row>
           </Grid>
-          <Button onClick={this.handleClick}>
+          {/* <Button onClick={this.handleClick}>
               API
-          </Button>
+          </Button> */}
         </Layout>
       </Container>
     );
@@ -103,6 +99,12 @@ const TextFont = styled.div`
   padding: 0 0 0.2em 0; 
   color: #B50000;
 `
+const Ellipsis = styled.div`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`
+
 // const ButtonStyle = styled.div`
 //   background-color: #B50000;
 //   color: white;

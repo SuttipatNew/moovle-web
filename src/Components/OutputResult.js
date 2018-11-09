@@ -1,5 +1,6 @@
 import React from 'react'
 import { Item } from 'semantic-ui-react'
+import styled from 'styled-components'
 
 const items = [
   {

@@ -6,7 +6,9 @@ import myImage from './Pic/LogoMoovle_01.png';
 import {Link} from 'react-router-dom'
 import SortMenu_2 from './SortMenu_2';
 import OutputResult from './OutputResult'
+import OutResult from './OutResult'
 import styled from 'styled-components'
+import Dotdotdot from 'react-clamp'
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -18,20 +20,12 @@ class Result extends Component {
     items: [
       {
         childKey: 0,
-        image: '/images/wireframe/image.png',
-        header: 'Header',
-        description: 'Description',
-        meta: 'Metadata',
-        extra: 'Extra',
-      },
-      {
-        childKey: 1,
-        image: '/images/wireframe/image.png',
-        header: 'Header',
-        description: 'Description',
-        meta: 'Metadata',
-        extra: 'Extra',
-      },
+        image: ' ',
+        header: ' ',
+        description: ' ',
+        meta: ' ',
+        extra: ' ',
+      }
     ]
   }
 
@@ -50,26 +44,26 @@ class Result extends Component {
         const items = stories.hits.hits.map(hit => ({ 
           image: '/images/wireframe/image.png',
           header: hit._source.title,
-          description: hit._source.text,
+          description: hit._source.text.substring(0, 200) + '...',
 
         }));
         this.setState({ items: items })
       });
   }
 
-  handleClick = () => {
-    console.log("Hello World")
-    fetch('http://localhost:9200/_search?q=brad%20pitt')
-    .then(function(response) {
-        if (response.status >= 400) {
-            throw new Error("Bad response from server");
-        }
-        return response.json();
-    })
-    .then(function(stories) {
-        console.log(stories);
-    });
-  }
+  // handleClick = () => {
+  //   console.log("Hello World")
+  //   fetch('http://localhost:9200/_search?q=brad%20pitt')
+  //   .then(function(response) {
+  //       if (response.status >= 400) {
+  //           throw new Error("Bad response from server");
+  //       }
+  //       return response.json();
+  //   })
+  //   .then(function(stories) {
+  //       console.log(stories);
+  //   });
+  // }
 
   routeChange(){
     window.location.hash = "search";
@@ -103,7 +97,7 @@ class Result extends Component {
                     }}>
                     <Icon flipped='horizontally' size='big' disabled name='search' />
                     <Form.Input placeholder='Search..' value={ text_search } onChange={this.handleChange} width={10} />
-                    <Button onClick={this.handleClick}>
+                    <Button>
                       Search
                     </Button>
                   </Form.Group>
@@ -130,7 +124,10 @@ class Result extends Component {
               </div>
             <div class = "row">
               <Container>
-                <OutputResult items={this.state.items} />
+                  <WidthContainer>
+                    <OutputResult items={this.state.items} />
+                    {/* <OutResult items={this.state.items} /> */}
+                  </WidthContainer>
               </Container>
             </div>
             </div>
@@ -144,4 +141,8 @@ export default Result;
 
 const TextFont = styled.div`
   font-size: 1em;
+`
+
+const WidthContainer = styled.div`
+max-width: 95%;
 `

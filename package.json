@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "clamp-js": "^0.7.0",
     "es6-promise": "^4.2.5",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.5.2",
+    "react-clamp": "^1.0.5",
     "react-dom": "^16.5.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
+    "readmore-js": "^2.2.1",
+    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.82.5",
     "styled-components": "^4.0.0"
   },
