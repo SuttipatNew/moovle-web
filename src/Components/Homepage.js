@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 
+import
   { Grid,
     Button,
     Container,
@@ -7,7 +7,7 @@ import
     Form,
   } from 'semantic-ui-react'
 import styled from 'styled-components';
-
+import myImage from './Pic/LogoMoovle_01.png';
 import SortMenu from './SortMenu';
 import {Link} from 'react-router-dom';
 require('es6-promise').polyfill();
@@ -50,17 +50,15 @@ class Homepage extends Component {
         <Layout>
           <Grid centered>
             <Grid.Row>
-              <TextFont>
-                Moovle
-              </TextFont>
+              <img src= {myImage} width = '210px' height = '210px' verticalAlign='middle' flide/>
             </Grid.Row>
             <Grid.Row>
-              <Form 
+              <Form
                 style={{
                   width: '75%',
-                }} 
+                }}
                 onSubmit={this.handleSubmit}>
-                <Form.Group 
+                <Form.Group
                   style={{
                     display: 'flex',
                     justifyContent: 'center'
@@ -90,13 +88,13 @@ class Homepage extends Component {
 export default Homepage;
 
 const Layout = styled.div`
-  padding-top: 20em;
+  padding-top: 5em;
   text-align: center;
 `
 const TextFont = styled.div`
   font-family: 'Playfair Display', serif;
   font-size: 6em;
-  padding: 0 0 0.2em 0; 
+  padding: 0 0 0.2em 0;
   color: #B50000;
 `
 const Ellipsis = styled.div`
