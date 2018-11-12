@@ -1,5 +1,6 @@
 import React from 'react'
 import { Item } from 'semantic-ui-react'
+import styled from 'styled-components'
 
 const items = [
   {
@@ -20,6 +21,6 @@ const items = [
   },
 ]
 
-const ItemProps = () => <Item.Group items={items} />
+const ItemProps = (props) => <Item.Group items={props.items} />
 
 export default ItemProps
