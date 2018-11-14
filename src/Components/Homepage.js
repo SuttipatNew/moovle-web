@@ -12,6 +12,9 @@ import SortMenu from './SortMenu';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import SortMenu from './SortMenu';
+import {Link} from 'react-router-dom';
+
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -32,6 +35,9 @@ class Homepage extends Component {
     this.setState({ submittedItem: text_search })
   }
 
+    this.setState({ submittedItem: text_search })
+  }
+  
   handleClick = () => {
     console.log("Hello World")
     fetch('http://localhost:9200/_search?q=brad%20pitt')
@@ -77,7 +83,7 @@ class Homepage extends Component {
                   <SortMenu />
                    <Button
                    onClick = {this.handleChangeState}
-                    content='SEARCH'
+                   content='SEARCH'
                    as = {Link}
                    to = '/search'>
                    Search

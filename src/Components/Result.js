@@ -10,6 +10,7 @@ import OutResult from './OutResult'
 import styled from 'styled-components'
 import Dotdotdot, { propTypes } from 'react-clamp'
 import PropTypes from 'prop-types';
+import Dotdotdot from 'react-clamp'
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -26,6 +27,20 @@ class Result extends Component {
 
   componentDidMount(){
     this.handleSubmit()
+  }
+  
+  state = { 
+    text_search: '',
+    items: [
+      {
+        childKey: 0,
+        image: ' ',
+        header: ' ',
+        description: ' ',
+        meta: ' ',
+        extra: ' ',
+      }
+    ]
   }
 
   handleChange = (e, {  value }) => this.setState({ text_search: value })
