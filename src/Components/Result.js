@@ -8,12 +8,26 @@ import SortMenu_2 from './SortMenu_2';
 import OutputResult from './OutputResult'
 import OutResult from './OutResult'
 import styled from 'styled-components'
+import Dotdotdot, { propTypes } from 'react-clamp'
+import PropTypes from 'prop-types';
 import Dotdotdot from 'react-clamp'
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 
 class Result extends Component {
+  
+  constructor(props) {
+    super();
+    this.state = {
+      text_search: props.text_search,
+      items: props.Item
+    }
+  }
+
+  componentDidMount(){
+    this.handleSubmit()
+  }
   
   state = { 
     text_search: '',
@@ -135,6 +149,11 @@ class Result extends Component {
         </div>
     );
   }
+}
+
+Result.propTypes = {
+  text_search: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired
 }
 
 export default Result;

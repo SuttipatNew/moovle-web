@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 
+import
   { Grid,
     Button,
     Container,
@@ -7,16 +7,27 @@ import
     Form,
   } from 'semantic-ui-react'
 import styled from 'styled-components';
+import myImage from './Pic/LogoMoovle_01.png';
+import SortMenu from './SortMenu';
+import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import SortMenu from './SortMenu';
 import {Link} from 'react-router-dom';
+
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 class Homepage extends Component {
   state = { item: ''}
 
-  handleChange = (e, { item, value }) => this.setState({ [item]: value })
+  handleChange = (e, { item, value }) => {
+    this.setState({ [item]: value })
+  }
+
+  handleChangeState = () => {
+    this.props.changeText(this.state.item)
+  }
 
   handleSubmit = () => {
     const { text_search } = this.state
@@ -24,6 +35,9 @@ class Homepage extends Component {
     this.setState({ submittedItem: text_search })
   }
 
+    this.setState({ submittedItem: text_search })
+  }
+  
   handleClick = () => {
     console.log("Hello World")
     fetch('http://localhost:9200/_search?q=brad%20pitt')
@@ -50,17 +64,15 @@ class Homepage extends Component {
         <Layout>
           <Grid centered>
             <Grid.Row>
-              <TextFont>
-                Moovle
-              </TextFont>
+              <img src= {myImage} width = '210px' height = '210px' verticalAlign='middle' flide/>
             </Grid.Row>
             <Grid.Row>
-              <Form 
+              <Form
                 style={{
                   width: '75%',
-                }} 
+                }}
                 onSubmit={this.handleSubmit}>
-                <Form.Group 
+                <Form.Group
                   style={{
                     display: 'flex',
                     justifyContent: 'center'
@@ -70,7 +82,8 @@ class Homepage extends Component {
                 </Form.Group>
                   <SortMenu />
                    <Button
-                    content='SEARCH'
+                   onClick = {this.handleChangeState}
+                   content='SEARCH'
                    as = {Link}
                    to = '/search'>
                    Search
@@ -89,14 +102,18 @@ class Homepage extends Component {
 
 export default Homepage;
 
+Homepage.propTypes = {
+  changeText: PropTypes.function
+}
+
 const Layout = styled.div`
-  padding-top: 20em;
+  padding-top: 5em;
   text-align: center;
 `
 const TextFont = styled.div`
   font-family: 'Playfair Display', serif;
   font-size: 6em;
-  padding: 0 0 0.2em 0; 
+  padding: 0 0 0.2em 0;
   color: #B50000;
 `
 const Ellipsis = styled.div`
