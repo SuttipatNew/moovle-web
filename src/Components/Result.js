@@ -10,7 +10,7 @@ import OutResult from './OutResult'
 import styled from 'styled-components'
 import Dotdotdot, { propTypes } from 'react-clamp'
 import PropTypes from 'prop-types';
-import Dotdotdot from 'react-clamp'
+
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 

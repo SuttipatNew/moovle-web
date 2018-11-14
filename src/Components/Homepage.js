@@ -12,9 +12,6 @@ import SortMenu from './SortMenu';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import SortMenu from './SortMenu';
-import {Link} from 'react-router-dom';
-
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
@@ -31,9 +28,6 @@ class Homepage extends Component {
 
   handleSubmit = () => {
     const { text_search } = this.state
-
-    this.setState({ submittedItem: text_search })
-  }
 
     this.setState({ submittedItem: text_search })
   }
@@ -62,9 +56,9 @@ class Homepage extends Component {
     return (
       <Container>
         <Layout>
-          <Grid centered>
+          <Grid centered style={{marginTop:'5em'}}>
             <Grid.Row>
-              <img src= {myImage} width = '210px' height = '210px' verticalAlign='middle' flide/>
+              <img src= {myImage} width = '210px' height = '210px' flide/>
             </Grid.Row>
             <Grid.Row>
               <Form
