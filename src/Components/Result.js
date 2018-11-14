@@ -10,6 +10,7 @@ import OutResult from './OutResult'
 import styled from 'styled-components'
 import Dotdotdot, { propTypes } from 'react-clamp'
 import PropTypes from 'prop-types';
+import Pagination from './Pagination';
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -141,6 +142,9 @@ class Result extends Component {
                   <WidthContainer>
                     <OutputResult items={this.state.items} />
                     {/* <OutResult items={this.state.items} /> */}
+                    <PaginationStyle>
+                      <Pagination />
+                    </PaginationStyle>
                   </WidthContainer>
               </Container>
             </div>
@@ -163,5 +167,11 @@ const TextFont = styled.div`
 `
 
 const WidthContainer = styled.div`
-max-width: 95%;
+  max-width: 95%;
+`
+
+const PaginationStyle = styled.div`
+  position:fixed;
+  bottom:20px;
+  left: 45%;
 `
