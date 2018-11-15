@@ -67,7 +67,7 @@ class Result extends Component {
     const items = json.hits.hits.map(hit => ({ 
       image: '/images/wireframe/image.png',
       header: hit._source.title,
-      description: hit._source.text.substring(0, 200) + '...',
+      description: hit._source.text.substring(0, 300) + '...',
       url: hit._source.url
     }));
     this.setState({
@@ -184,7 +184,7 @@ const WidthContainer = styled.div`
 
 const PaginationStyle = styled.div`
   position: auto;
-  bottom: 20px;
-  left: 45%;
-  padding-top: 1em;
+  // bottom: 20px;
+  // left: 45%;
+  padding-left: 5em;
 `

@@ -34,7 +34,7 @@ const ItemProps = (props) => (
           <Item.Content>
             <Item.Header 
               as= 'a'
-              to={item.url}
+              href={item.url}
             >
               {item.header}
             </Item.Header>
