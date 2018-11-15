@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pagination } from 'semantic-ui-react'
 
-const PaginationExampleShorthand = () => (
+const PaginationExampleShorthand = (props) => (
     // <div style={{textAlign:'center'}}>
         <Pagination
             defaultActivePage={1}
@@ -9,7 +9,9 @@ const PaginationExampleShorthand = () => (
             lastItem={null}
             pointing
             secondary
-            totalPages={3}
+            activePage={props.activePage}
+            totalPages={props.totalPages}
+            onPageChange={props.onPageChange}
         />
     // </div>
 )

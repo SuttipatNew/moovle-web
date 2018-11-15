@@ -1,5 +1,5 @@
 import React from 'react'
-import { Item } from 'semantic-ui-react'
+import { Item, ItemGroup } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 const items = [
@@ -21,6 +21,26 @@ const items = [
   },
 ]
 
-const ItemProps = (props) => <Item.Group items={props.items} />
+const ItemProps = (props) => (
+  <div>
+    <Item.Group>
+    {
+      props.items.map(item => (
+        <Item>
+          <Item.Image size='small' src={item.image} />
+
+          <Item.Content>
+            <Item.Header as='a'>{item.header}</Item.Header>
+            <Item.Description>
+              <p>{item.description}</p>
+            </Item.Description>
+          </Item.Content>
+        </Item>
+      ))
+    }
+    </Item.Group>
+  </div>
+)
+
 
 export default ItemProps

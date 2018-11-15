@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
 import SubMenu from './SubMenu.js'
-import { Container, Grid , Menu, Input , Icon, Form, Divider, Button } from 'semantic-ui-react';
+import { Container, Grid , Menu, Input , Icon, Form, Divider, Button, GridColumn, GridRow } from 'semantic-ui-react';
 import myImage from './Pic/LogoMoovle_01.png';
 import {Link} from 'react-router-dom'
 import SortMenu_2 from './SortMenu_2';
@@ -21,8 +21,8 @@ class Result extends Component {
   constructor(props) {
     super();
     this.state = {
-      text_search: props.text_search,
-      items: props.Item
+      text_search: window.location.search.split('=')[1],
+      items: []
     }
   }
 
@@ -32,6 +32,8 @@ class Result extends Component {
   
   state = { 
     text_search: '',
+    page: 0,
+    totalPages: 0,
     items: [
       {
         childKey: 0,
@@ -46,24 +48,16 @@ class Result extends Component {
 
   handleChange = (e, {  value }) => this.setState({ text_search: value })
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { text_search } = this.state
-    fetch('http://localhost:9200/_search?q= '+ text_search)
-    .then((response) => {
-      if (response.status >= 400) {
-          throw new Error("Bad response from server");
-      }
-      return response.json();
+    const newURL = 'http://' + window.location.host + window.location.pathname + '?q=' + text_search
+    console.log(newURL)
+    window.history.pushState(null, null, newURL)
+    const items = await this.makeRequest(text_search, 1)
+    this.setState({ 
+      items: items ,
+      page: 1
     })
-    .then((stories) => {
-        const items = stories.hits.hits.map(hit => ({ 
-          image: '/images/wireframe/image.png',
-          header: hit._source.title,
-          description: hit._source.text.substring(0, 200) + '...',
-
-        }));
-        this.setState({ items: items })
-      });
   }
 
   // handleClick = () => {
@@ -79,6 +73,33 @@ class Result extends Component {
   //       console.log(stories);
   //   });
   // }
+
+  makeRequest = async (text_search, activePage) => {
+    const response = await fetch('http://localhost:9200/_search?q= '+ text_search + '&size=10&from=' + (activePage-1)*10);
+    const json = await response.json();
+    const items = json.hits.hits.map(hit => ({ 
+      image: '/images/wireframe/image.png',
+      header: hit._source.title,
+      description: hit._source.text.substring(0, 200) + '...',
+    }));
+    this.setState({
+      totalPages: parseInt(json.hits.total/10) + 1 ,
+    })
+    return items;
+  }
+
+  handlePaginationChange = async (e, { activePage }) => {
+    this.setState({
+      items: [],
+    });
+    const { text_search } = this.state;
+    const items = await this.makeRequest(text_search, activePage);
+    this.setState({ 
+      items: items,
+      page: activePage
+    });
+  }
+
 
   routeChange(){
     window.location.hash = "search";
@@ -141,9 +162,12 @@ class Result extends Component {
               <Container>
                   <WidthContainer>
                     <OutputResult items={this.state.items} />
-                    {/* <OutResult items={this.state.items} /> */}
                     <PaginationStyle>
-                      <Pagination />
+                      <Pagination
+                        totalPages={this.state.totalPages} 
+                        activePage={this.state.page}
+                        onPageChange={this.handlePaginationChange} 
+                      />
                     </PaginationStyle>
                   </WidthContainer>
               </Container>
@@ -171,7 +195,8 @@ const WidthContainer = styled.div`
 `
 
 const PaginationStyle = styled.div`
-  position:fixed;
-  bottom:20px;
+  position: auto;
+  bottom: 20px;
   left: 45%;
+  padding-top: 1em;
 `
