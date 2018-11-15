@@ -31,20 +31,6 @@ class Homepage extends Component {
 
     this.setState({ submittedItem: text_search })
   }
-  
-  // handleClick = () => {
-  //   console.log("Hello World")
-  //   fetch('http://localhost:9200/_search?q=brad%20pitt')
-  //   .then(function(response) {
-  //       if (response.status >= 400) {
-  //           throw new Error("Bad response from server");
-  //       }
-  //       return response.json();
-  //   })
-  //   .then(function(stories) {
-  //       console.log(stories);
-  //   });
-  // }
 
   routeChange(){
     window.location.hash = "search";
@@ -85,9 +71,6 @@ class Homepage extends Component {
                 </Form>
             </Grid.Row>
           </Grid>
-          {/* <Button onClick={this.handleClick}>
-              API
-          </Button> */}
         </Layout>
       </Container>
     );

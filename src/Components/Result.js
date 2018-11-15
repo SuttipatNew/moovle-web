@@ -42,6 +42,7 @@ class Result extends Component {
         description: ' ',
         meta: ' ',
         extra: ' ',
+        url: ' ',
       }
     ]
   }
@@ -51,7 +52,7 @@ class Result extends Component {
   handleSubmit = async () => {
     const { text_search } = this.state
     const newURL = 'http://' + window.location.host + window.location.pathname + '?q=' + text_search
-    console.log(newURL)
+    // console.log(newURL)
     window.history.pushState(null, null, newURL)
     const items = await this.makeRequest(text_search, 1)
     this.setState({ 
@@ -60,20 +61,6 @@ class Result extends Component {
     })
   }
 
-  // handleClick = () => {
-  //   console.log("Hello World")
-  //   fetch('http://localhost:9200/_search?q=brad%20pitt')
-  //   .then(function(response) {
-  //       if (response.status >= 400) {
-  //           throw new Error("Bad response from server");
-  //       }
-  //       return response.json();
-  //   })
-  //   .then(function(stories) {
-  //       console.log(stories);
-  //   });
-  // }
-
   makeRequest = async (text_search, activePage) => {
     const response = await fetch('http://localhost:9200/_search?q= '+ text_search + '&size=10&from=' + (activePage-1)*10);
     const json = await response.json();
@@ -81,6 +68,7 @@ class Result extends Component {
       image: '/images/wireframe/image.png',
       header: hit._source.title,
       description: hit._source.text.substring(0, 200) + '...',
+      url: hit._source.url
     }));
     this.setState({
       totalPages: parseInt(json.hits.total/10) + 1 ,

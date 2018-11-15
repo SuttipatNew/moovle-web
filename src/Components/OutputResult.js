@@ -1,6 +1,6 @@
 import React from 'react'
 import { Item, ItemGroup } from 'semantic-ui-react'
-import styled from 'styled-components'
+import {Link} from 'react-router-dom';
 
 const items = [
   {
@@ -10,6 +10,7 @@ const items = [
     description: 'Description',
     meta: 'Metadata',
     extra: 'Extra',
+    url: 'Url'
   },
   {
     childKey: 1,
@@ -18,6 +19,7 @@ const items = [
     description: 'Description',
     meta: 'Metadata',
     extra: 'Extra',
+    url: 'Url'
   },
 ]
 
@@ -30,7 +32,12 @@ const ItemProps = (props) => (
           <Item.Image size='small' src={item.image} />
 
           <Item.Content>
-            <Item.Header as='a'>{item.header}</Item.Header>
+            <Item.Header 
+              as= 'a'
+              to={item.url}
+            >
+              {item.header}
+            </Item.Header>
             <Item.Description>
               <p>{item.description}</p>
             </Item.Description>
