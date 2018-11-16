@@ -4,7 +4,7 @@ import SubMenu from './SubMenu.js'
 import { Container, Grid , Menu, Input , Icon, Form, Divider, Button } from 'semantic-ui-react';
 import myImage from './Pic/LogoMoovle_01.png';
 import {Link} from 'react-router-dom'
-import SortMenu_2 from './SortMenu_2';
+import SortMenu_2 from './SortMenu';
 import OutputResult from './OutputResult'
 import OutResult from './OutResult'
 import styled from 'styled-components'
@@ -25,6 +25,10 @@ class Result extends Component {
   }
 
   componentDidMount(){
+    // this.setState({
+    //   text_search: this.props.text_search,
+    //   items: this.props.Item
+    // })
     this.handleSubmit()
   }
 
@@ -32,7 +36,8 @@ class Result extends Component {
 
   handleSubmit = () => {
     const { text_search } = this.state
-    fetch('http://localhost:9200/_search?q= '+ text_search)
+    console.log('http://localhost:9200/_search?default_operator=AND&q=category:movie+text:'+ text_search)
+    fetch('http://localhost:9200/_search?default_operator=AND&q=category:movie+text:'+ text_search)
     .then((response) => {
       if (response.status >= 400) {
           throw new Error("Bad response from server");

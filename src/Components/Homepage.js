@@ -98,6 +98,7 @@ export default Homepage;
 
 Homepage.propTypes = {
   changeText: PropTypes.function
+  // changeItem: PropTypes.function
 }
 
 const Layout = styled.div`

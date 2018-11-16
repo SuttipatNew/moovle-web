@@ -14,6 +14,7 @@ export default class SortMenu extends Component {
       <Layout>
         <Menu text>
           {/* <Menu.Item header>Sort By</Menu.Item> */}
+          
           <Menu.Item
             name='movies'
             color='red'
