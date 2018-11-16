@@ -32,20 +32,6 @@ class Homepage extends Component {
     this.setState({ submittedItem: text_search })
   }
 
-  handleClick = () => {
-    console.log("Hello World")
-    fetch('http://localhost:9200/_search?q=brad%20pitt')
-    .then(function(response) {
-        if (response.status >= 400) {
-            throw new Error("Bad response from server");
-        }
-        return response.json();
-    })
-    .then(function(stories) {
-        console.log(stories);
-    });
-  }
-
   routeChange(){
     window.location.hash = "search";
     }
@@ -56,9 +42,9 @@ class Homepage extends Component {
     return (
       <Container>
         <Layout>
-          <Grid centered>
+          <Grid centered style={{marginTop:'5em'}}>
             <Grid.Row>
-              <img src= {myImage} width = '210px' height = '210px' verticalAlign='middle' flide/>
+              <img src= {myImage} width = '210px' height = '210px' flide/>
             </Grid.Row>
             <Grid.Row>
               <Form
@@ -74,20 +60,17 @@ class Homepage extends Component {
                   <Icon flipped='horizontally' size='big' disabled name='search' />
                   <Form.Input placeholder='Search..' item='item' value={ text_search } onChange={this.handleChange} width={10} />
                 </Form.Group>
-                  <SortMenu />
+                  {/* <SortMenu /> */}
                    <Button
                    onClick = {this.handleChangeState}
-                    content='SEARCH'
-                   as = {Link}
-                   to = '/search'>
+                   content='SEARCH'
+                   as={Link}
+                   to={'/search?q=' + this.state.item}>
                    Search
                   </Button>
                 </Form>
             </Grid.Row>
           </Grid>
-          {/* <Button onClick={this.handleClick}>
-              API
-          </Button> */}
         </Layout>
       </Container>
     );
@@ -98,7 +81,6 @@ export default Homepage;
 
 Homepage.propTypes = {
   changeText: PropTypes.function
-  // changeItem: PropTypes.function
 }
 
 const Layout = styled.div`

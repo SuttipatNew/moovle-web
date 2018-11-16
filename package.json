@@ -6,6 +6,7 @@
     "clamp-js": "^0.7.0",
     "es6-promise": "^4.2.5",
     "isomorphic-fetch": "^2.2.1",
+    "query-string": "^6.2.0",
     "react": "^16.5.2",
     "react-clamp": "^1.0.5",
     "react-dom": "^16.5.2",

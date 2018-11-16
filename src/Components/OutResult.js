@@ -1,14 +1,28 @@
 import React from 'react'
 import { Item } from 'semantic-ui-react'
 
-const description = [
-  'Cute dogs come in a variety of shapes and sizes. Some cute dogs are cute for their adorable faces, others for their. Cute dogs come in a variety of shapes and sizes. Some cute dogs are cute for their adorable faces, others for their. Cute dogs come in a variety of shapes and sizes. Some cute dogs are cute for their adorable faces, others for their. Cute dogs come in a variety of shapes and sizes. Some cute dogs are cute for their adorable faces, others for their',
-  'tiny stature, and even others for their massive size.',
+const items = [
+  {
+    childKey: 0,
+    image: '/images/wireframe/image.png',
+    header: 'Header',
+    description: 'Description',
+    meta: 'Metadata',
+    extra: 'Extra',
+  },
+  {
+    childKey: 1,
+    image: '/images/wireframe/image.png',
+    header: 'Header',
+    description: 'Description',
+    meta: 'Metadata',
+    extra: 'Extra',
+  },
 ].join(' ')
 
 // description[0] = description[0]
 
-const ItemExampleDescriptions = () => (
+const ItemExampleDescriptions = (props) => (
   <Item.Group>
     <Item>
       <Item.Image size='small' src='https://react.semantic-ui.com/images/wireframe/image.png' />
@@ -16,8 +30,8 @@ const ItemExampleDescriptions = () => (
       <Item.Content>
         <Item.Header as='a'>Cute Dog</Item.Header>
         <Item.Description>
-          <p>{description}</p>
-          <p>Many people also have their own barometers for what makes a cute dog.</p>
+          <p>{items}</p>
+          {/* <p>Many people also have their own barometers for what makes a cute dog.</p> */}
         </Item.Description>
       </Item.Content>
     </Item>
@@ -27,13 +41,13 @@ const ItemExampleDescriptions = () => (
 
       <Item.Content>
         <Item.Header as='a'>Cute Dog</Item.Header>
-        <Item.Description content={description} />
+        <Item.Description content={items} />
       </Item.Content>
     </Item>
 
     <Item>
       <Item.Image size='small' src='https://react.semantic-ui.com/images/wireframe/image.png' />
-      <Item.Content header='Cute Dog' description={description} />
+      <Item.Content header='Cute Dog' description={items} />
     </Item>
   </Item.Group>
 )
