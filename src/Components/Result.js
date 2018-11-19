@@ -8,7 +8,6 @@ import SortMenu from './SortMenu';
 import OutputResult from './OutputResult'
 import OutResult from './OutResult'
 import styled from 'styled-components'
-import Dotdotdot, { propTypes } from 'react-clamp'
 import PropTypes from 'prop-types';
 import Pagination from './Pagination';
 
