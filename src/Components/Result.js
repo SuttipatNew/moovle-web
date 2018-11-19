@@ -53,7 +53,7 @@ class Result extends Component {
 
   handleSubmit = async () => {
     const { text_search , catagory } = this.state
-    const newURL = 'http://' + window.location.host + window.location.pathname + '?q=' + text_search
+    const newURL = 'http://' + window.location.host + window.location.pathname + '?q=' + text_search + '&filter=' + catagory
     window.history.pushState(null, null, newURL)
     const items = await this.makeRequest(text_search, 1 , catagory)
     this.setState({ 
