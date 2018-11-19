@@ -70,8 +70,14 @@ class Result extends Component {
       description: hit._source.text.substring(0, 300) + '...',
       url: hit._source.url
     }));
+    console.log(json)
     this.setState({
       totalPages: parseInt(json.hits.total/10) + 1 ,
+      pagination: <Pagination
+        totalPages={parseInt(json.hits.total/10) + 1} 
+        activePage={1}
+        onPageChange={this.handlePaginationChange} 
+      />
     })
     return items;
   }
@@ -84,7 +90,12 @@ class Result extends Component {
     const items = await this.makeRequest(text_search, activePage);
     this.setState({ 
       items: items,
-      page: activePage
+      page: activePage,
+      pagination: <Pagination
+        totalPages={this.state.totalPages} 
+        activePage={activePage}
+        onPageChange={this.handlePaginationChange} 
+      />
     });
   }
 
@@ -151,11 +162,7 @@ class Result extends Component {
                   <WidthContainer>
                     <OutputResult items={this.state.items} />
                     <PaginationStyle>
-                      <Pagination
-                        totalPages={this.state.totalPages} 
-                        activePage={this.state.page}
-                        onPageChange={this.handlePaginationChange} 
-                      />
+                      {this.state.pagination}
                     </PaginationStyle>
                   </WidthContainer>
               </Container>
