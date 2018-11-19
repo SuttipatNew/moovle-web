@@ -4,7 +4,7 @@ import SubMenu from './SubMenu.js'
 import { Container, Grid , Menu, Input , Icon, Form, Divider, Button, GridColumn, GridRow } from 'semantic-ui-react';
 import myImage from './Pic/LogoMoovle_01.png';
 import {Link} from 'react-router-dom'
-import SortMenu_2 from './SortMenu_2';
+import SortMenu from './SortMenu';
 import OutputResult from './OutputResult'
 import OutResult from './OutResult'
 import styled from 'styled-components'
@@ -22,6 +22,7 @@ class Result extends Component {
     super();
     this.state = {
       text_search: window.location.search.split('=')[1],
+      catagory: "all",
       items: []
     }
   }
@@ -32,6 +33,7 @@ class Result extends Component {
   
   state = { 
     text_search: '',
+    catagory: '',
     page: 0,
     totalPages: 0,
     items: [
@@ -50,20 +52,39 @@ class Result extends Component {
   handleChange = (e, {  value }) => this.setState({ text_search: value })
 
   handleSubmit = async () => {
-    const { text_search } = this.state
+    const { text_search , catagory } = this.state
     const newURL = 'http://' + window.location.host + window.location.pathname + '?q=' + text_search
-    // console.log(newURL)
     window.history.pushState(null, null, newURL)
-    const items = await this.makeRequest(text_search, 1)
+    const items = await this.makeRequest(text_search, 1 , catagory)
     this.setState({ 
       items: items ,
       page: 1
     })
   }
 
-  makeRequest = async (text_search, activePage) => {
-    const response = await fetch('http://localhost:9200/_search?q= '+ text_search + '&size=10&from=' + (activePage-1)*10);
+  makeRequest = async (text_search, activePage , catagory) => {
+    let form = ''
+    if (catagory == 'all' || catagory == 'image') {
+      form = "q="
+    }else{
+      form = "default_operator=AND&q=category:"+ catagory + "+text:"
+    }
+    const response = await fetch('http://localhost:9200/_search?'+ form + text_search + '&size=10&from=' + (activePage-1)*10);
     const json = await response.json();
+    let items = ""
+    if (catagory == 'image') {
+      items = json.hits.hits.map(hit => ({ 
+        image: '/images/wireframe/image.png',
+        url: hit._source.url
+      }));
+    }else{
+      items = json.hits.hits.map(hit => ({ 
+        image: '/images/wireframe/image.png',
+        header: hit._source.title,
+        description: hit._source.text.substring(0, 300) + '...',
+        url: hit._source.url
+      }));
+    }
     const items = json.hits.hits.map(hit => ({ 
       image: '/images/wireframe/image.png',
       header: hit._source.title,
@@ -86,8 +107,8 @@ class Result extends Component {
     this.setState({
       items: [],
     });
-    const { text_search } = this.state;
-    const items = await this.makeRequest(text_search, activePage);
+    const { text_search, catagory } = this.state;
+    const items = await this.makeRequest(text_search, activePage , catagory);
     this.setState({ 
       items: items,
       page: activePage,
@@ -104,6 +125,16 @@ class Result extends Component {
     window.location.hash = "search";
     }
   
+  onChange_Catagory(status){
+    this.setState({
+      catagory: status
+    }, ()=>{
+      this.handleSubmit()
+    }
+    )
+
+  }
+
   render() {
     const { text_search, submittedItem } = this.state
     return (
@@ -141,7 +172,9 @@ class Result extends Component {
                     display: 'flex',
                     justifyContent: 'left'
                   }}>
-                    <SortMenu_2 />
+                    <SortMenu 
+                    catagory = {this.state.catagory}
+                    changeCatagory = {this.onChange_Catagory.bind(this)} />
                   </Form.Group>
                 </Form>
             </div>
@@ -160,7 +193,9 @@ class Result extends Component {
             <div class = "row">
               <Container>
                   <WidthContainer>
-                    <OutputResult items={this.state.items} />
+                    <OutputResult 
+                    items={this.state.items} 
+                    catagory = {this.state.catagory} />
                     <PaginationStyle>
                       {this.state.pagination}
                     </PaginationStyle>

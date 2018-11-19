@@ -60,7 +60,7 @@ class Homepage extends Component {
                   <Icon flipped='horizontally' size='big' disabled name='search' />
                   <Form.Input placeholder='Search..' item='item' value={ text_search } onChange={this.handleChange} width={10} />
                 </Form.Group>
-                  <SortMenu />
+                  {/* <SortMenu /> */}
                    <Button
                    onClick = {this.handleChangeState}
                    content='SEARCH'

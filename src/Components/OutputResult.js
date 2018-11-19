@@ -1,53 +1,81 @@
-import React from 'react'
+import React,{ Component }  from 'react'
 import { Item, ItemGroup } from 'semantic-ui-react'
 import {Link} from 'react-router-dom';
 
-const items = [
-  {
-    childKey: 0,
-    image: '/images/wireframe/image.png',
-    header: 'Header',
-    description: 'Description',
-    meta: 'Metadata',
-    extra: 'Extra',
-    url: 'Url'
-  },
-  {
-    childKey: 1,
-    image: '/images/wireframe/image.png',
-    header: 'Header',
-    description: 'Description',
-    meta: 'Metadata',
-    extra: 'Extra',
-    url: 'Url'
-  },
-]
-
-const ItemProps = (props) => (
-  <div>
-    <Item.Group>
+export default class OutputResult extends Component{
+  items = [
     {
-      props.items.map(item => (
-        <Item>
-          <Item.Image size='small' src={item.image} />
+      childKey: 0,
+      image: '/images/wireframe/image.png',
+      header: 'Header',
+      description: 'Description',
+      meta: 'Metadata',
+      extra: 'Extra',
+      url: 'Url'
+    },
+    {
+      childKey: 1,
+      image: '/images/wireframe/image.png',
+      header: 'Header',
+      description: 'Description',
+      meta: 'Metadata',
+      extra: 'Extra',
+      url: 'Url'
+    },
+  ]
 
-          <Item.Content>
-            <Item.Header 
-              as= 'a'
-              href={item.url}
-            >
-              {item.header}
-            </Item.Header>
-            <Item.Description>
-              <p>{item.description}</p>
-            </Item.Description>
-          </Item.Content>
+  // state = { catagory: "" }
+
+  // constructor(props) {
+  //   super();
+  //   this.state = {
+  //     catagory: props.catagory
+  //   }
+  // }
+
+  genImage = () => {
+    let ItemProps = ''
+  if(this.props.catagory == 'image'){
+    return(
+      this.props.items.map(item => (
+        <Item>
+          <Item.Image  src={item.image} as= 'a'
+                    href={item.url}/>
         </Item>
       ))
+    )
+  }else{
+    return(
+          <Item.Group>
+          {
+            this.props.items.map(item => (
+              <Item>
+                <Item.Image size='small' src={item.image} />
+
+                <Item.Content>
+                  <Item.Header 
+                    as= 'a'
+                    href={item.url}
+                  >
+                    {item.header}
+                  </Item.Header>
+                  <Item.Description>
+                    <p>{item.description}</p>
+                  </Item.Description>
+                </Item.Content>
+              </Item>
+            ))
+          }
+          </Item.Group>
+      )
     }
-    </Item.Group>
-  </div>
-)
-
-
-export default ItemProps
+  }
+ 
+  render(){
+      return(
+        <div>
+          {this.genImage()}
+        </div>
+        )
+  }
+} 
