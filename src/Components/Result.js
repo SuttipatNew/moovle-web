@@ -88,7 +88,7 @@ class Result extends Component {
       }));
     }else{
       items = json.hits.hits.map(hit => ({ 
-        image: '/images/wireframe/image.png',
+        // image: '/images/wireframe/image.png',
         header: hit._source.title,
         description: hit._source.text.substring(0, 300) + '...',
         url: hit._source.url
@@ -188,7 +188,7 @@ class Result extends Component {
            <div class = "thirteen wide column">
             <div class = "row">
               <TextFont>
-                  Do you find 
+                  Do you find "{text_search}" ?
               </TextFont>
               <div class = 'ui hidden divider'></div>
               </div>

@@ -6,7 +6,7 @@ export default class OutputResult extends Component{
   items = [
     {
       childKey: 0,
-      image: '/images/wireframe/image.png',
+      // image: '/images/wireframe/image.png',
       header: 'Header',
       description: 'Description',
       meta: 'Metadata',
@@ -15,7 +15,7 @@ export default class OutputResult extends Component{
     },
     {
       childKey: 1,
-      image: '/images/wireframe/image.png',
+      // image: '/images/wireframe/image.png',
       header: 'Header',
       description: 'Description',
       meta: 'Metadata',
@@ -50,7 +50,7 @@ export default class OutputResult extends Component{
           {
             this.props.items.map(item => (
               <Item>
-                <Item.Image size='small' src={item.image} />
+                {/* <Item.Image size='small' src={item.image} /> */}
 
                 <Item.Content>
                   <Item.Header 
