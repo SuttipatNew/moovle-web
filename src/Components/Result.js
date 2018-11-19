@@ -85,12 +85,6 @@ class Result extends Component {
         url: hit._source.url
       }));
     }
-    const items = json.hits.hits.map(hit => ({ 
-      image: '/images/wireframe/image.png',
-      header: hit._source.title,
-      description: hit._source.text.substring(0, 300) + '...',
-      url: hit._source.url
-    }));
     console.log(json)
     this.setState({
       totalPages: parseInt(json.hits.total/10) + 1 ,
