@@ -190,9 +190,11 @@ class Result extends Component {
                     <OutputResult 
                     items={this.state.items} 
                     catagory = {this.state.catagory} />
-                    <PaginationStyle>
-                      {this.state.pagination}
-                    </PaginationStyle>
+                    <div style={{textAlign: "center"}}>
+                      <PaginationStyle>
+                        {this.state.pagination}
+                      </PaginationStyle>
+                    </div>
                   </WidthContainer>
               </Container>
             </div>
@@ -219,8 +221,9 @@ const WidthContainer = styled.div`
 `
 
 const PaginationStyle = styled.div`
-  position: auto;
+  // position: auto;
   // bottom: 20px;
   // left: 45%;
-  padding-left: 5em;
+  // padding-left: 15em;
+
 `
