@@ -33,9 +33,14 @@ export default class OutputResult extends Component{
   //   }
   // }
 
-  genImage = () => {
+  genWebPage = () => {
     let ItemProps = ''
-  if(this.props.catagory == 'image'){
+  
+  if(this.props.number == 0){
+    return(
+      "Search not found!!!"
+    )
+  }else if(this.props.catagory == 'image'){
     return(
       this.props.items.map(item => (
         <Item>
@@ -74,7 +79,7 @@ export default class OutputResult extends Component{
   render(){
       return(
         <div>
-          {this.genImage()}
+          {this.genWebPage()}
         </div>
         )
   }
