@@ -104,8 +104,3 @@ const Ellipsis = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
 `
-
-// const ButtonStyle = styled.div`
-//   background-color: #B50000;
-//   color: white;
-// `

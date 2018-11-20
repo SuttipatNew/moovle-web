@@ -229,9 +229,5 @@ const WidthContainer = styled.div`
 `
 
 const PaginationStyle = styled.div`
-  // position: auto;
-  // bottom: 20px;
-  // left: 45%;
-  // padding-left: 15em;
 
 `
