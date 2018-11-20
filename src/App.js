@@ -5,12 +5,12 @@ import './App.css';
 
 import Homepage from './Components/Homepage';
 import Result from './Components/Result';
-
+import Construction from './Components/Construction';
 class App extends Component {
-  
+
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       text_search: "",
       items: [
         {
@@ -45,6 +45,7 @@ class App extends Component {
           <Route exact path="/search" component={ () => <Result text_search = {this.state.text_search}
                                                                       items = {this.state.items}
                                                         /> } />
+          <Route exact path="/construction" component={ () => <Construction/> } />
         </Switch>
       </BrowserRouter>
     );
