@@ -3,9 +3,19 @@ import { Menu } from 'semantic-ui-react'
 import styled from 'styled-components'
 
 export default class SortMenu extends Component {
-  state = { activeItem: 'closest' }
+  state = { activeItem: "" }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name })
+    this.props.changeCatagory(name)
+  }
+
+  constructor(props) {
+    super();
+    this.state = {
+      activeItem: props.catagory
+    }
+  }
 
   render() {
     const { activeItem } = this.state
@@ -15,9 +25,21 @@ export default class SortMenu extends Component {
         <Menu text>
           {/* <Menu.Item header>Sort By</Menu.Item> */}
           <Menu.Item
-            name='movies'
+            name='all'
             color='red'
-            active={activeItem === 'movies'}
+            active={activeItem === 'all'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name='movie'
+            color='red'
+            active={activeItem === 'movie'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name='series'
+            color='red'
+            active={activeItem === 'series'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
@@ -27,15 +49,21 @@ export default class SortMenu extends Component {
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name='cast'
+            name='person'
             color='red'
-            active={activeItem === 'cast'}
+            active={activeItem === 'person'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
             name='image'
             color='red'
             active={activeItem === 'image'}
+            onClick={this.handleItemClick}
+          />
+        <Menu.Item
+            name='review'
+            color='red'
+            active={activeItem === 'review'}
             onClick={this.handleItemClick}
           />
         </Menu>
