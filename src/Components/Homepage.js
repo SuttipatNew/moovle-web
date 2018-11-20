@@ -32,6 +32,12 @@ class Homepage extends Component {
     this.setState({ submittedItem: text_search })
   }
 
+  handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      window.location.href = window.location.href + 'search?q=' + this.state.item
+    }
+  }
+
   routeChange(){
     window.location.hash = "search";
     }
@@ -58,7 +64,7 @@ class Homepage extends Component {
                     justifyContent: 'center'
                   }}>
                   <Icon flipped='horizontally' size='big' disabled name='search' />
-                  <Form.Input placeholder='Search..' item='item' value={ text_search } onChange={this.handleChange} width={10} />
+                  <Form.Input placeholder='Search..' item='item' value={ text_search } onChange={this.handleChange} width={10} onKeyDown={this.handleKeyDown} />
                 </Form.Group>
                   {/* <SortMenu /> */}
                    <Button
