@@ -34,7 +34,7 @@ class Result extends Component {
       items: []
     }
   }
-
+  
   componentDidMount(){
     this.handleSubmit()
   }
@@ -42,6 +42,7 @@ class Result extends Component {
   state = { 
     text_search: '',
     catagory: '',
+    number: 0,
     page: 0,
     totalPages: 0,
     items: [
@@ -94,14 +95,15 @@ class Result extends Component {
         url: hit._source.url
       }));
     }
-    this.setState({
-      totalPages: parseInt(json.hits.total/10) + 1 ,
-      pagination: <Pagination
-        totalPages={parseInt(json.hits.total/10) + 1} 
-        activePage={1}
-        onPageChange={this.handlePaginationChange} 
-      />
-    })
+      this.setState({
+        number: parseInt(json.hits.total),
+        totalPages: parseInt(json.hits.total/10) + 1 ,
+        pagination: <Pagination
+          totalPages={parseInt(json.hits.total/10) + 1} 
+          activePage={1}
+          onPageChange={this.handlePaginationChange} 
+        />
+      })
     return items;
   }
 
@@ -136,6 +138,20 @@ class Result extends Component {
     )
 
   }
+
+  genPagination = () =>{
+    if(this.state.number == 0){
+      return(null)
+    }else{
+      return(
+        <PaginationStyle>
+          {this.state.pagination}
+        </PaginationStyle>
+      )
+    }
+
+  }
+
 
   render() {
     const { text_search, submittedItem } = this.state
@@ -197,11 +213,10 @@ class Result extends Component {
                   <WidthContainer>
                     <OutputResult 
                     items={this.state.items} 
+                    number = {this.state.number}
                     catagory = {this.state.catagory} />
                     <div style={{textAlign: "center"}}>
-                      <PaginationStyle>
-                        {this.state.pagination}
-                      </PaginationStyle>
+                      {this.genPagination()}
                     </div>
                   </WidthContainer>
               </Container>
