@@ -6,7 +6,7 @@ export default class OutputResult extends Component{
   items = [
     {
       childKey: 0,
-      // image: '/images/wireframe/image.png',
+      image: '/images/wireframe/image.png',
       header: 'Header',
       description: 'Description',
       meta: 'Metadata',
@@ -15,7 +15,7 @@ export default class OutputResult extends Component{
     },
     {
       childKey: 1,
-      // image: '/images/wireframe/image.png',
+      image: '/images/wireframe/image.png',
       header: 'Header',
       description: 'Description',
       meta: 'Metadata',
@@ -42,12 +42,15 @@ export default class OutputResult extends Component{
     )
   }else if(this.props.catagory == 'image'){
     return(
-      this.props.items.map(item => (
+      this.props.items.map(item => {
+        // console.log(item.image)
+        return (
         <Item>
-          <Item.Image  src={item.image} as= 'a'
-                    href={item.url}/>
+          {
+            item.image && item.image.map(url => <Item.Image size= 'small' src={url} as= 'a' href={item.url}></Item.Image>)
+          }
         </Item>
-      ))
+      )})
     )
   }else{
     return(

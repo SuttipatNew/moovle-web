@@ -88,6 +88,15 @@ class Result extends Component {
         image: hit._source.images,
         url: hit._source.url,
       }));
+      // console.log(items)
+      // console.log(items.forEach((data) => {
+      //   // console.log('data: ',data)
+      //   let images = data.image
+      //   images.forEach( (image) => {
+      //     // console.log('Images: ',image)
+      //   })
+      // }))
+      // console.log(json.hits)
     }else{
       items = json.hits.hits.map(hit => ({ 
         // image: '/images/wireframe/image.png',
