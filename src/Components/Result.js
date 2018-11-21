@@ -82,10 +82,11 @@ class Result extends Component {
     const response = await fetch('http://localhost:9200/_search?'+ form + text_search + '&size=10&from=' + (activePage-1)*10);
     const json = await response.json();
     let items = ""
+    // console.log("response: " + json.hits.hits[0]._source.images)
     if (catagory == 'image') {
       items = json.hits.hits.map(hit => ({ 
-        image: '/images/wireframe/image.png',
-        url: hit._source.url
+        image: hit._source.images,
+        url: hit._source.url,
       }));
     }else{
       items = json.hits.hits.map(hit => ({ 
